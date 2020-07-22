@@ -1,0 +1,687 @@
+/*Global*/
+:root {
+  /* Color */
+
+  --color-white: #ffffff;
+  --color-light-white: #eeeeee;
+  --color-dark-white: #bdbdbd;
+  --color-pink: #fe918d;
+  --color-dark-pink: #ff6863;
+  --color-dark-grey: #4d4d4d;
+  --color-grey: #616161;
+  --color-light-grey: #7c7979;
+  --color-blue: #73aace;
+  --color-yellow: #fff7d1;
+  --color-orange: #feb546;
+  --color-dark-orange: #fdb10b;
+  --color-black: #000000;
+
+  /* Font size */
+  --font-large: 48px;
+  --font-medium: 28px;
+  --font-regular: 18px;
+  --font-small: 16px;
+  --font-micro: 14px;
+
+  /* Font weight */
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+
+  /* Size */
+  --size-border-radius: 4px;
+
+  /* Animation */
+  --animation-duration: 300ms;
+}
+
+/* Universal tags */
+/* 모든 태그 박스 사이즈를 패딩을 줬을때 동일한 높이와 너비가 되도록 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  /* 텍스트에 마우스를 올려도 변화X */
+  cursor: default;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* 아이폰을 위해 paddind을 0px로 둬야함. */
+button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0px;
+}
+
+/* Typography */
+/* 텍스트에 대한 스타일링  */
+h2 {
+  font-size: var(--font-large);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  margin: 16px 0px;
+}
+
+h3 {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-black);
+  margin: 8px 0;
+}
+
+h4 {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  margin: 8px 0;
+}
+
+p {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  margin: 4px 0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.icon-2x {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  cursor: pointer;
+  margin: 8px;
+}
+
+/* Navbar */
+#navbar {
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  align-items: center;
+  color: var(--color-white);
+  padding: 16px;
+  transition: all var(--animation-duration) ease-in-out;
+  z-index: 1;
+  height: 8%;
+}
+
+#navbar.navbar--dark {
+  background-color: #feb546;
+  padding: 6px;
+}
+
+.navbar__menu {
+  display: flex;
+}
+
+.navbar__logo {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+  color: white;
+  display: flex;
+  padding: 4px;
+  align-items: center;
+}
+
+.navbar__menu__item {
+  padding: 8px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: var(--size-border-radius);
+  transition: all var(--animation-duration) ease;
+}
+
+.navbar__menu__item.active {
+  border: 1px solid var(--color-white);
+}
+
+.navbar__menu__item:hover {
+  background-color: var(--color-dark-orange);
+  transform: scale(1.08);
+}
+
+/* toggle (media query) */
+.navbar__toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 24px;
+  color: var(--color-white);
+  /* opacity는 마우스 클릭이 돼서 display로 해야함. */
+  display: none;
+}
+/* Home */
+/* orange로 바꾸기 */
+#home {
+  background: url(imgs/background.png) center/cover no-repeat;
+  padding: 40px;
+  padding-top: 120px;
+  text-align: center;
+}
+
+.home__avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 2px solid var(--color-light-white);
+}
+
+.home__title,
+.home__description {
+  color: var(--color-white);
+}
+
+.home__contact {
+  color: var(--color-white);
+  font-size: var(--font-regular);
+  font-weight: var(--weight-bold);
+  margin: 24px;
+  padding: 8px 12px;
+  border: 2px solid var(--color-white);
+  border-radius: var(--size-border-radius);
+}
+
+.home__contact:hover {
+  transform: scale(1.15);
+  transition: all var(--animation-duration) ease;
+}
+/* Section common */
+.section {
+  padding: 50px;
+  text-align: center;
+  margin: auto;
+}
+.section__container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* About */
+.about__majors {
+  display: flex;
+  justify-content: space-between;
+  margin: 80px 0;
+}
+
+.major__icon {
+  width: 170px;
+  height: 170px;
+  font-size: 70px;
+  line-height: 170px;
+  margin: auto;
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue);
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+.major__icon i {
+  transition: all var(--animation-duration) ease;
+}
+.major__icon:hover i {
+  color: var(--color-orange);
+  transform: scale(1.3);
+}
+.major__title,
+.major__description {
+  color: var(--color-dark-grey);
+}
+.major__description {
+  font-size: var(--font-small);
+}
+
+.job,
+.school {
+  display: flex;
+  align-items: center;
+}
+
+.job__description {
+  margin: 0 16px;
+  text-align: left;
+}
+
+.job__name,
+.job__period,
+.school__name,
+.school__period {
+  color: var(--color-light-grey);
+}
+
+.job__name,
+.school__name {
+  font-size: var(--font-small);
+}
+.job__period,
+.school__period {
+  font-size: var(--font-micro);
+}
+
+.job__logo {
+  width: 130px;
+  height: 100px;
+}
+.school__logo {
+  width: 65px;
+  height: 65px;
+  margin-left: 30px;
+  margin-right: 35px;
+}
+
+/* Skii */
+#skills {
+  background-color: var(--color-yellow);
+}
+
+.skillset {
+  display: flex;
+  background-color: var(--color-light-grey);
+  color: var(--color-light-white);
+  margin: 20px 0;
+}
+.skillset__title {
+  color: var(--color-white);
+}
+
+.skillset__left {
+  flex-basis: 60%;
+  background-color: var(--color-dark-grey);
+  padding: 20px 30px;
+}
+.skill__description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+.skill__bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-grey);
+}
+.skill__value {
+  height: 3px;
+  background-color: var(--color-orange);
+}
+.skillset__right {
+  flex-basis: 40%;
+  background-color: var(--color-light-grey);
+}
+
+.tools {
+  background-color: var(--color-grey);
+}
+.tools,
+.etc {
+  padding: 10px;
+}
+
+/* Work */
+.work__categories {
+  margin: 40px;
+}
+.category__btn {
+  border: 1px solid var(--color-dark-white);
+  border-radius: var(--size-border-radius);
+  font-size: var(--font-regular);
+  font-weight: var(--weight-bold);
+  padding: 8px 48px;
+  width: 180px;
+  height: 40px;
+  transition: all var(--animation-duration) ease;
+  position: relative;
+}
+
+.category__btn.selected {
+  transform: translateY(-10px);
+}
+
+.category__btn.selected,
+.category__btn:hover {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+}
+
+.category__btn.active .category__count.active,
+.category__btn:hover .category__count {
+  opacity: 1;
+  top: 0;
+}
+.category__count {
+  border: 1px solid var(--color-pink);
+  background-color: var(--color-dark-pink);
+  color: var(--color-white);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  display: inline-block;
+  margin-left: 15px;
+  position: absolute;
+  top: -20px;
+  right: 30px;
+  opacity: 0;
+  transition: all var(--animation-duration) ease;
+}
+
+.category__count-all {
+  border: 1px solid var(--color-pink);
+  background-color: var(--color-dark-pink);
+  color: var(--color-white);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  display: inline-block;
+  margin-left: 15px;
+  position: relative;
+  left: 4px;
+}
+
+.work__projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 1;
+  transition: all var(--animation-duration) ease-out;
+}
+
+.work__projects.anim-out {
+  opacity: 0.6;
+  transform: scale(0.96) translateY(20px);
+}
+
+.project {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 250px;
+  margin: 2px;
+  background-color: var(--color-light-white);
+}
+
+.project.invisible {
+  display: none;
+}
+.project__img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.project__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--animation-duration) ease-in;
+}
+
+.project:hover .project__description {
+  opacity: 0.8;
+  transform: translateY(0px);
+}
+.project__description h4 {
+  color: var(--color-yellow);
+  font-weight: var(--weight-bold);
+}
+
+.project__description h4:after {
+  content: "";
+  display: block;
+  position: relative;
+  left: 50%;
+  margin-top: 8px;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background-color: var(--color-dark-white);
+}
+
+/* Testimonial */
+#testimonials {
+  background-color: var(--color-light-white);
+}
+
+.testimonials {
+  margin: 40px;
+}
+
+.testimonial {
+  display: flex;
+  margin: 32px 0;
+}
+
+.testimonial__avata {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.testimonial__avata:nth-child(odd) {
+  margin-right: 40px;
+}
+
+.testimonial__avata:nth-child(even) {
+  margin-left: 40px;
+}
+
+.testimonial__speechBubble {
+  padding: 18px;
+  background-color: var(--color-white);
+  border-radius: var(--size-border-radius);
+  width: 100%;
+}
+
+.testimonial__speechBubble p {
+  color: var(--color-light-grey);
+}
+
+.speechBubble__name a {
+  color: var(--color-blue);
+}
+
+/* Contact */
+
+#contact {
+  background-color: var(--color-orange);
+  padding: 10px;
+}
+
+.contact__title,
+.contact__email,
+.contact__rights {
+  color: var(--color-white);
+  font-weight: var(--weight-semi-bold);
+}
+
+.contact__title {
+  margin: 32px 0;
+}
+
+.contact__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: var(--font-large);
+  margin: 24px 0;
+}
+
+.contact__links i:hover {
+  transform: scale(1.2);
+  /* color: var(--color-dark-pink); */
+  transition: all var(--animation-duration) ease-in;
+}
+.contact__links img:hover {
+  transform: scale(1.1);
+  transition: all var(--animation-duration) ease-in;
+}
+
+.contact__links i {
+  transform: scale(1.05);
+}
+
+.contact__links img {
+  width: 150px;
+  height: 47px;
+  margin: 20px;
+  transform: translateY(5px);
+}
+
+/* Scroll Arrow up */
+.arrow-up {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  font-size: 50px;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--animation-duration) ease-in;
+}
+
+/* 원래는 display: none / block 이지만 그러면 animation이 안먹어서 이렇게 하는거임 */
+/* 그래서 pointer-events을 써서 투명할때 클릭을 못하게 해야함. */
+.arrow-up.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 반응형 (평소에는 숨기고 최소한의 정보만 미디어 커리에 넣기)*/
+/*For below 768px screen width */
+@media screen and (max-width: 768px) {
+  :root {
+    /* Font size */
+    --font-large: 28px;
+    --font-medium: 20px;
+    --font-regular: 16px;
+    --font-small: 14px;
+    --font-micro: 12px;
+  }
+  /* direction을 위에서 아래로 */
+  #navbar {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--color-orange);
+    padding: 6px 16px;
+    transition: all var(--animation-duration) ease;
+  }
+
+  #navbar.navbar--dark {
+    padding: 16px;
+  }
+  .navbar__menu {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    display: none;
+  }
+
+  .navbar__toggle-btn {
+    display: block;
+  }
+
+  .navbar__menu.open {
+    display: block;
+  }
+
+  .section {
+    padding: 10px 20px;
+  }
+  #home {
+    padding: 5px 20px;
+  }
+  .about__majors {
+    flex-direction: column;
+  }
+
+  .major {
+    margin-bottom: 30px;
+  }
+
+  .skillset {
+    flex-direction: column;
+  }
+  .category_btn {
+    margin: 4px 0;
+    width: 100%;
+  }
+  .category__btn.selected {
+    transform: translateY(0px);
+  }
+
+  .project {
+    flex-grow: 0.8;
+  }
+  .testimonial {
+    flex-direction: column;
+    align-items: center;
+  }
+  .testimonial__avata {
+    width: 120px;
+    height: 120px;
+  }
+  .testimonial__avata:nth-child(even),
+  .testimonial__avata:nth-child(odd) {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .testimonial__speechBubble {
+    order: 1;
+  }
+
+  .arrow-up {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    line-height: 50px;
+    right: 20px;
+    bottom: 20px;
+  }
+  .about__majors {
+    margin: 20px 10px;
+  }
+}
