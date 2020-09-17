@@ -475,6 +475,7 @@ p {
 /* Testimonial */
 #testimonials {
   background-color: var(--color-light-white);
+  display: none;
 }
 
 .testimonials {
