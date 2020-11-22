@@ -4,14 +4,6 @@
 const navbor = document.querySelector("#navbar");
 const navbarHeight = navbar.getBoundingClientRect().height;
 
-function scrollIntoView(selector) {
-  const scrollTo = document.querySelector(selector);
-  scrollTo.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
-
 document.addEventListener("scroll", () => {
   if (window.scrollY > navbarHeight) {
     navbar.classList.add("navbar--dark");
@@ -115,3 +107,68 @@ workBtnContainer.addEventListener("click", (e) => {
     projectContainer.classList.remove("anim-out");
   }, 300);
 });
+
+// intersection observer 사용.
+// 1단계 모든 요소 가져오기
+const sectionIds = ["#home", "#about", "#skills", "#work", "#contact"];
+
+//배열을 돌면서 각 id를 section dom요소로 변환 => map
+const sections = sectionIds.map((id) => document.querySelector(id));
+const navItems = sectionIds.map((id) =>
+  document.querySelector(`[data-link="${id}"]`)
+);
+
+// 2단계 observer
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+
+function selectNavItem(selected) {
+  selectedNavItem.classList.remove("active");
+  selectedNavItem = selected;
+  selectedNavItem.classList.add("active");
+}
+
+const observerOptions = {
+  root: null,
+  rootMargin: "0px", // viewport에서 +rootMargin값을 포함한 부분까지 확인. (눈에 보이기 전에 확인하고 싶으면 or 컨텐츠를 미리 준비하기 위해)
+  threshold: 0.3, // 얼마만큼 보여줘야 callback함수가 처리되는지. (1로 설정하면 화면에 다 들어와야 callback실행됨) 0~1(100%)
+};
+const observerCallback = (entries, observer) => {
+  // entries (화면에 들어온 요소의 정보를 담고 있다. boundingClientRect, intersectionRatio ..)
+  entries.forEach((entry) => {
+    // entry가 나가는 상황이면 index +1 에 표시
+    if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+      const index = sectionIds.indexOf(`#${entry.target.id}`);
+      // 스크롤링이 아래로 되어서 페이지가 올라가서 안보이기 시작할 때
+      if (entry.boundingClientRect.y < 0) {
+        selectedNavIndex = index + 1;
+      } else {
+        selectedNavIndex = index - 1;
+      }
+    }
+  });
+};
+
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+sections.forEach((section) => observer.observe(section));
+
+window.addEventListener("wheel", () => {
+  if (window.scrollY === 0) {
+    selectedNavIndex = 0;
+  } else if (
+    window.scrollY + window.innerHeight ===
+    document.body.clientHeight
+  ) {
+    selectedNavIndex = navItems.length - 1;
+  }
+  selectNavItem(navItems[selectedNavIndex]);
+});
+
+function scrollIntoView(selector) {
+  const scrollTo = document.querySelector(selector);
+  scrollTo.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+  selectNavItem(navItems[sectionIds.indexOf(selector)]);
+}
